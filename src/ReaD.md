@@ -19,22 +19,23 @@ The code starts by defining a private inner class `HashNode` which represents a 
 The `MyHashTable` class has two constructors: one which initializes the hash table with a default size of 11, and another which allows the user to specify a custom size. The class also has several methods
 #### *Here is the solution code*:
 ![](https://cbgd.ask.fm/fd3/71a30/7839/4756/8b72/0d5fc8e2f2c4/original/421914.jpg)
+        
         import java.util.ArrayList;
         import java.util.List;
         
         public class MyHashTable<K, V> {
-        private static class HashNode<K, V>{
-        private K key;
-        private V value;
-        private HashNode<K, V> next;
-        public HashNode(K key, V value){
-        this.key = key;
-        this.value = value;
-        }
-        @Override
-        public String toString() {
-        return "{" + key + " " + value + "}";
-        }
+            private static class HashNode<K, V>{
+            private K key;
+            private V value;
+            private HashNode<K, V> next;
+            public HashNode(K key, V value){
+            this.key = key;
+            this.value = value;
+            }
+            @Override
+            public String toString() {
+            return "{" + key + " " + value + "}";
+            }
         }
         private HashNode<K, V>[] chainArray;
         private int M = 11;
