@@ -48,80 +48,50 @@ public class MyHashTable<K, V> {
             }
         }
         HashNode<K, V> newNode = new HashNode<>(key, value);
-        newNode.next = chainArray[index];
-        chainArray[index] = newNode;
+        chain.add(newNode);
         size++;
     }
     public V get(K key){
         int index = hash(key);
-        HashNode<K, V> node = chainArray[index];
-        while(node != null){
+        ArrayList<HashNode<K, V>> chain = chainArray[index];
+        for(HashNode<K, V> node : chain){
             if(node.key.equals(key)){
                 return node.value;
             }
-            node = node.next;
         }
         return null;
     }
 public V remove(K key){
         int index = hash(key);
-        HashNode<K, V> prev = null;
-        HashNode<K, V> node = chainArray[index];
-        while(node!= null){
+        ArrayList<HashNode<K, V>> chain = chainArray[index];
+        for(HashNode<K, V> node : chain){
             if(node.key.equals(key)){
-                if(prev == null){
-                    chainArray[index]  = node.next;
-                }
-                else{
-                    prev.next = node.next;
-                }
+               chain.remove(node);
                 size--;
                 return node.value;
             }
-            prev = node;
-            node = node.next;
         }
         return null;
 }
 public boolean contains(V value){
-        for(HashNode<K, V> node : chainArray){
-            while(node != null){
+        for(ArrayList <HashNode<K, V>> chain : chainArray){
+            for(HashNode<K, V> node : chain){
                 if(node.value.equals(value)){
                     return true;
                 }
-                node = node.next;
             }
         }
         return false;
 }
 public K getKey(V value){
-        for(HashNode<K, V> node : chainArray){
-            while(node != null){
+        for(ArrayList<HashNode<K, V>> chain : chainArray){
+            for(HashNode<K, V> node : chain){
                 if(node.value.equals(value)){
                     return node.key;
                 }
-                node = node.next;
             }
         }
         return null;
 }
-public int size(){
-        return size;
-}
-@Override
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        for(HashNode<K, V> node : chainArray){
-            while(node != null){
-                sb.append(node);
-                node = node.next;
-                if(node != null){
-                    sb.append(", ")
-                }
-            }
-        }
-        sb.append("}");
-        return sb.toString();
-}
+
 }
