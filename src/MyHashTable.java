@@ -1,3 +1,5 @@
+import com.sun.jdi.VoidValue;
+
 import java.util.ArrayList;
 public class MyHashTable<K, V> {
     private class HashNode<K, V> {
@@ -89,5 +91,35 @@ public boolean contains(V value){
             }
         }
         return false;
+}
+public K getKey(V value){
+        for(HashNode<K, V> node : chainArray){
+            while(node != null){
+                if(node.value.equals(value)){
+                    return node.key;
+                }
+                node = node.next;
+            }
+        }
+        return null;
+}
+public int size(){
+        return size;
+}
+@Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        for(HashNode<K, V> node : chainArray){
+            while(node != null){
+                sb.append(node);
+                node = node.next;
+                if(node != null){
+                    sb.append(", ")
+                }
+            }
+        }
+        sb.append("}");
+        return sb.toString();
 }
 }
