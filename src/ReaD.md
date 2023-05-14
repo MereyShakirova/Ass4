@@ -11,6 +11,7 @@
 
 * Tune your hashCode method in MyTestingClass so that it does not violate the uniform distribution.
 ### MyHashTable:
+![](https://avatars.mds.yandex.net/i?id=8ecf7a9b07abfbc6819e96b7c5de7765-7086354-images-thumbs&n=13)
 #### *Explanation:*
 This is a Java implementation of a Hash Table data structure. The hash table stores key-value pairs and allows efficient lookup and insertion of elements based on the key.
 
@@ -150,8 +151,17 @@ The `MyHashTable` class has two constructors: one which initializes the hash tab
     }
 
 ### MyTestingClass:
+![](https://cdn.dribbble.com/users/671650/screenshots/1803971/ab_testing_dribbble.gif)
 #### *Explanation:*
+This code contains two classes: MyTestingClass and Student.
+
+The MyTestingClass class has two private fields id and name and a constructor that generates a random id and assigns it to the id field, and then creates a name string by concatenating the id with the string "Test-".
+
+It also has a custom hashCode() method that returns the remainder of the id field divided by 11. This method is used in the MyHashTable class to determine the index of the hash table where an object of MyTestingClass type will be stored.
+
+The Student class has two private fields name and age and a constructor that assigns a random age between 10 and 30 to the age field and a default name "John" to the name field. This class is used as the value type in the MyHashTable class, where instances of Student are stored in the hash table using instances of MyTestingClass as keys.
 #### *Here is the solution code*:
+![](https://cbgd.ask.fm/fd3/71a30/7839/4756/8b72/0d5fc8e2f2c4/original/421914.jpg)
     class MyTestingClass {
         
         private int id;
@@ -183,7 +193,6 @@ The `MyHashTable` class has two constructors: one which initializes the hash tab
         }
     }
 
-![](https://cbgd.ask.fm/fd3/71a30/7839/4756/8b72/0d5fc8e2f2c4/original/421914.jpg)
 
 
 ![screen-gif](https://i.pinimg.com/originals/8d/38/6f/8d386fe55805e14eb11db87f5acca164.gif)
