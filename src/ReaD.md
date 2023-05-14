@@ -37,87 +37,95 @@ The `MyHashTable` class has two constructors: one which initializes the hash tab
             return "{" + key + " " + value + "}";
             }
         }
+
         private HashNode<K, V>[] chainArray;
         private int M = 11;
         private int size;
         public MyHashTable() {
-        chainArray = (HashNode<K, V>[]) new HashNode[M];
+            chainArray = (HashNode<K, V>[]) new HashNode[M];
         }
+
         public MyHashTable(int M) {
-        this.M = M;
-        chainArray = (HashNode<K, V>[]) new HashNode[M];
+            this.M = M;
+            chainArray = (HashNode<K, V>[]) new HashNode[M];
         }
+
         private int hash(K key) {
-        return (key.hashCode() & 0x7fffffff) % M;
+            return (key.hashCode() & 0x7fffffff) % M;
         }
+
         public void put(K key, V value) {
-        int bucketIndex = hash(key);
-        HashNode<K, V> node = chainArray[bucketIndex];
-        while(node != null){
-        if(node.key.equals(key)){
-        node.value = value;
-        return;
+            int bucketIndex = hash(key);
+            HashNode<K, V> node = chainArray[bucketIndex];
+            while(node != null){
+                if(node.key.equals(key)){
+                    node.value = value;
+                    return;
+                }
+            node = node.next;
+            }
+            HashNode<K, V> newNode = new HashNode<>(key, value);
+            newNode.next = chainArray[bucketIndex];
+            chainArray[bucketIndex] = newNode;
+            size++;
         }
-        node = node.next;
-        }
-        HashNode<K, V> newNode = new HashNode<>(key, value);
-        newNode.next = chainArray[bucketIndex];
-        chainArray[bucketIndex] = newNode;
-        size++;
-        }
+        
         public V get(K key) {
-        int bucketIndex = hash(key);
-        HashNode<K, V> node = chainArray[bucketIndex];
-        while(node != null){
-        if(node.key.equals(key)){
-        return node.value;
+            int bucketIndex = hash(key);
+            HashNode<K, V> node = chainArray[bucketIndex];
+            while(node != null){
+                if(node.key.equals(key)){
+                    return node.value;
+                }
+                node = node.next;
+            }
+            return null;
         }
-        node = node.next;
-        }
-        return null;
-        }
+
         public V remove(K key) {
-        int bucketIndex = hash(key);
-        HashNode<K, V> node = chainArray[bucketIndex];
-        HashNode<K, V> prev = null;
-        while(node != null){
-        if(node.key.equals(key)){
-        if(prev == null){
-        chainArray[bucketIndex] = node.next;
-        } else {
-        prev.next = node.next;
+            int bucketIndex = hash(key);
+            HashNode<K, V> node = chainArray[bucketIndex];
+            HashNode<K, V> prev = null;
+            while(node != null){
+                if(node.key.equals(key)){
+                    if(prev == null){
+                        chainArray[bucketIndex] = node.next;
+                    } else {
+                        prev.next = node.next;
+                    }
+                    size--;
+                    return node.value;
+                }
+                prev = node;
+                node = node.next;
+            }
+            return null;
         }
-        size--;
-        return node.value;
-        }
-        prev = node;
-        node = node.next;
-        }
-        return null;
-        }
+
         public boolean contains(V value) {
-        for(int i=0; i<M; i++){
-        HashNode<K, V> node = chainArray[i];
-        while(node != null){
-        if(node.value.equals(value)){
-        return true;
+            for(int i=0; i<M; i++){
+                HashNode<K, V> node = chainArray[i];
+                    while(node != null){
+                        if(node.value.equals(value)){
+                            return true;
+                        }
+                        node = node.next;
+                }
+            }
+            return false;
         }
-        node = node.next;
-        }
-        }
-        return false;
-        }
+
         public K getKey(V value) {
-        for(int i=0; i<M; i++){
-        HashNode<K, V> node = chainArray[i];
-        while(node != null){
-        if(node.value.equals(value)){
-        return node.key;
-        }
-        node = node.next;
-        }
-        }
-        return null;
+            for(int i=0; i<M; i++){
+                HashNode<K, V> node = chainArray[i];
+                    while(node != null){
+                        if(node.value.equals(value)){
+                            return node.key;
+                        }
+                        node = node.next;
+                    }
+                }
+            return null;
         }
         
         public static void main(String[] args) {
@@ -144,6 +152,37 @@ The `MyHashTable` class has two constructors: one which initializes the hash tab
 ### MyTestingClass:
 #### *Explanation:*
 #### *Here is the solution code*:
+    class MyTestingClass {
+        
+        private int id;
+        
+        private String name;
+        // constructor, getters, setters
+        
+        public MyTestingClass() {
+            this.id = (int)(Math.random()*1000);
+            this.name = "Test-" + id;
+        }
+        // custom hashCode method
+        
+        @Override
+        public int hashCode() {
+            return id % 11;
+        }
+    }
+    
+    class Student {
+        private String name;
+    
+        private int age;
+        // constructor, getters, setters
+        
+        public Student() {
+            this.name = "John";
+            this.age = (int)(Math.random()*20 + 10);
+        }
+    }
+
 ![](https://cbgd.ask.fm/fd3/71a30/7839/4756/8b72/0d5fc8e2f2c4/original/421914.jpg)
 
 
