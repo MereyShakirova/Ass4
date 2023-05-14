@@ -162,6 +162,7 @@ It also has a custom hashCode() method that returns the remainder of the id fiel
 The Student class has two private fields name and age and a constructor that assigns a random age between 10 and 30 to the age field and a default name "John" to the name field. This class is used as the value type in the MyHashTable class, where instances of Student are stored in the hash table using instances of MyTestingClass as keys.
 #### *Here is the solution code*:
 ![](https://cbgd.ask.fm/fd3/71a30/7839/4756/8b72/0d5fc8e2f2c4/original/421914.jpg)
+    
     class MyTestingClass {
         
         private int id;
