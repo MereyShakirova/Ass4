@@ -16,15 +16,15 @@ private class HashNode<K, V>{
 private HashNode<K, V>[] chainArray;
 private int M = 11;
 private int size;
-public MyHashTable() {
-    this.chainArray = (HashNode<K, V>[]) new HashNode[M];
+public MyHashTable(){
+    chainArray = new HashNode[M];
 }
-public MyHashTable(int M) {
+public MyHashTable(int M){
     this.M = M;
-    this.chainArray = (HashNode<K, V>[]) new HashNode[M];
+    chainArray = new HashNode[M];
 }
 private int hash(K key) {
-    return(key.hash)
+    return Objects.hashCode(key) % M;
 }
 public void put(K key, V value){
     int index =hash(key);
