@@ -1,4 +1,3 @@
-
 // hash: This is a private method which calculates the hash value of a given key using the hashCode() method of the key object.
 
 // put: This method inserts a new key-value pair into the hash table. It first calculates the bucket index using the hash() method, then iterates through the chain at that index until it finds the node with the given key. If the key already exists in the chain, its value is updated. Otherwise, a new node is created and added to the chain.
