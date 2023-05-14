@@ -1,5 +1,3 @@
-import com.sun.jdi.VoidValue;
-
 import java.util.ArrayList;
 public class MyHashTable<K, V> {
     private class HashNode<K, V> {
@@ -18,17 +16,20 @@ public class MyHashTable<K, V> {
         }
     }
 
-    private HashNode<K, V>[] chainArray;
+    private ArrayList<HashNode<K, V>>[] chainArray;
     private int M = 11;
     private int size;
 
     public MyHashTable() {
-        chainArray = new HashNode[M];
+        chainArray = new ArrayList[M];
+        for(int i = 0; i < M; i++){
+            chainArray[i] = new ArrayList<>();
+        }
     }
 
     public MyHashTable(int M) {
         this.M = M;
-        chainArray = new HashNode[M];
+        chainArray = new ArrayList[M];
     }
 
     private int hash(K key) {
