@@ -1,4 +1,5 @@
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyHashTable<K, V> {
     private class HashNode<K, V>{
@@ -14,41 +15,39 @@ public class MyHashTable<K, V> {
             return "{" + key + " " + value + "}";
         }
     }
-    private HashNode<K, V> [] chainArray;
-    private int M = 11; //default number of chains
+    private HashNode<K, V>[] chainArray;
+    private int M = 11;
     private int size;
     public MyHashTable() {
-        this.chainArray = (HashNode<K, V>[]) new HashNode[M];
-        this.size = 0;
+        chainArray = (HashNode<K, V>[]) new HashNode[M];
     }
     public MyHashTable(int M) {
         this.M = M;
-        this.chainArray = (HashNode<K, V>[]) new HashNode[M];
-        this.size = 0;
+        chainArray = (HashNode<K, V>[]) new HashNode[M];
     }
     private int hash(K key) {
         return (key.hashCode() & 0x7fffffff) % M;
     }
     public void put(K key, V value) {
-        int index = hash(key);
-        HashNode<K, V> node = chainArray[index];
-        while (node != null) {
-            if (node.key.equals(key)) {
+        int bucketIndex = hash(key);
+        HashNode<K, V> node = chainArray[bucketIndex];
+        while(node != null){
+            if(node.key.equals(key)){
                 node.value = value;
                 return;
             }
             node = node.next;
         }
         HashNode<K, V> newNode = new HashNode<>(key, value);
-        newNode.next = chainArray[index];
-        chainArray[index] = newNode;
+        newNode.next = chainArray[bucketIndex];
+        chainArray[bucketIndex] = newNode;
         size++;
     }
     public V get(K key) {
-        int index = hash(key);
-        HashNode<K, V> node = chainArray[index];
-        while (node != null) {
-            if (node.key.equals(key)) {
+        int bucketIndex = hash(key);
+        HashNode<K, V> node = chainArray[bucketIndex];
+        while(node != null){
+            if(node.key.equals(key)){
                 return node.value;
             }
             node = node.next;
@@ -56,13 +55,13 @@ public class MyHashTable<K, V> {
         return null;
     }
     public V remove(K key) {
-        int index = hash(key);
-        HashNode<K, V> node = chainArray[index];
+        int bucketIndex = hash(key);
+        HashNode<K, V> node = chainArray[bucketIndex];
         HashNode<K, V> prev = null;
-        while (node != null) {
-            if (node.key.equals(key)) {
-                if (prev == null) {
-                    chainArray[index] = node.next;
+        while(node != null){
+            if(node.key.equals(key)){
+                if(prev == null){
+                    chainArray[bucketIndex] = node.next;
                 } else {
                     prev.next = node.next;
                 }
@@ -75,10 +74,10 @@ public class MyHashTable<K, V> {
         return null;
     }
     public boolean contains(V value) {
-        for (int i = 0; i < M; i++) {
+        for(int i=0; i<M; i++){
             HashNode<K, V> node = chainArray[i];
-            while (node != null) {
-                if (node.value.equals(value)) {
+            while(node != null){
+                if(node.value.equals(value)){
                     return true;
                 }
                 node = node.next;
@@ -87,10 +86,10 @@ public class MyHashTable<K, V> {
         return false;
     }
     public K getKey(V value) {
-        for (int i = 0; i < M; i++) {
+        for(int i=0; i<M; i++){
             HashNode<K, V> node = chainArray[i];
-            while (node != null) {
-                if (node.value.equals(value)) {
+            while(node != null){
+                if(node.value.equals(value)){
                     return node.key;
                 }
                 node = node.next;
@@ -98,4 +97,26 @@ public class MyHashTable<K, V> {
         }
         return null;
     }
+
+    public static void main(String[] args) {
+        MyHashTable<MyTestingClass, Student> table = new MyHashTable<>();
+        for(int i=0; i<10000; i++) {
+            MyTestingClass key = new MyTestingClass();
+            Student value = new Student();
+            table.put(key, value);
+        }
+        List<Integer> bucketSizes = new ArrayList<>();
+        for(int i=0; i<table.chainArray.length; i++) {
+            HashNode<MyTestingClass, Student> node = table.chainArray[i];
+            int size = 0;
+            while(node != null) {
+                size++;
+                node = node.next;
+            }
+            bucketSizes.add(size);
+        }
+        System.out.println("Bucket Sizes: " + bucketSizes);
+    }
 }
+
+

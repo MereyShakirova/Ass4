@@ -1,14 +1,26 @@
 class MyTestingClass {
     private int id;
     private String name;
-    public MyTestingClass(int id, String name) {
-        this.id = id;
-        this.name = name;
+    // constructor, getters, setters
+    public MyTestingClass() {
+        this.id = (int)(Math.random()*1000);
+        this.name = "Test-" + id;
     }
+    // custom hashCode method
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return id % 11;
     }
-//equals
+}
+
+class Student {
+    private String name;
+    private int age;
+    // constructor, getters, setters
+    public Student() {
+        this.name = "John";
+        this.age = (int)(Math.random()*20 + 10);
+    }
+}
 
 
