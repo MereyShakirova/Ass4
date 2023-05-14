@@ -30,21 +30,22 @@ public class MyHashTable<K, V> {
     public MyHashTable(int M) {
         this.M = M;
         chainArray = new ArrayList[M];
+        for(int i = 0; i < M; i++){
+            chainArray[i] = new ArrayList<>();
+        }
     }
 
     private int hash(K key) {
-        return Objects.hashCode(key) % M;
+        return (key.hashCode() & 0x7fffffff) % M;
     }
-
     public void put(K key, V value) {
         int index = hash(key);
-        HashNode<K, V> node = chainArray[index];
-        while (node != null) {
-            if (node.key.equals(key)) {
-                node.value = value;
+        ArrayList<HashNode<K, V>> chain = chainArray[index];
+        while (chain != null) {
+            if (chain.key.equals(key)) {
+                chain.value = value;
                 return;
             }
-            node = node.next;
         }
         HashNode<K, V> newNode = new HashNode<>(key, value);
         newNode.next = chainArray[index];
