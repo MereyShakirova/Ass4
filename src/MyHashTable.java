@@ -41,9 +41,9 @@ public class MyHashTable<K, V> {
     public void put(K key, V value) {
         int index = hash(key);
         ArrayList<HashNode<K, V>> chain = chainArray[index];
-        while (chain != null) {
-            if (chain.key.equals(key)) {
-                chain.value = value;
+        for (HashNode<K, V> node : chain) {
+            if (node.key.equals(key)) {
+                node.value = value;
                 return;
             }
         }
