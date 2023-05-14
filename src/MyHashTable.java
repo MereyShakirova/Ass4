@@ -26,5 +26,15 @@ public MyHashTable(int M) {
 private int hash(K key) {
     return(key.hash)
 }
-
+public void put(K key, V value){
+    int index =hash(key);
+    HashNode<K, V> node = chainArray[index];
+    while(node!= null){
+        if()
+    }(node.key.equals(key)) {
+        node.value = value;
+        return;
+    }
+    node = node.next;
+}
 }
