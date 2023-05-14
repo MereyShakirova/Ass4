@@ -1,7 +1,8 @@
 # **Assignment 4 for  laboratory work for the Algorithm Data Structure**
 ![](https://avatars.mds.yandex.net/i?id=81aeee622298a892460bc27a41b999ac38f1bb68-2432023-images-thumbs&n=13)
 ### Description:
-!(*All students must comply with these criteria. If the student does not comply with these criteria, the score will be lowered.*)!
+!(*All students must comply with these criteria. If the student does not comply with these criteria, the score will be lowered.
+You are not allowed to use default hashing methods like Objects.hash()*)!
 ### In this work, these following criteria had to be done:
 * Create an additional class for testing K (example: MyHashTable<MyTestingClass, Student> table = new MyHashTable<>();)
 
@@ -171,7 +172,7 @@ The Student class has two private fields name and age and a constructor that ass
         // constructor, getters, setters
         
         public MyTestingClass() {
-            this.id = (int)(Math.random()*1000);
+            this.id = (int)(Math.random()*10000);
             this.name = "Test-" + id;
         }
         // custom hashCode method
@@ -189,13 +190,15 @@ The Student class has two private fields name and age and a constructor that ass
         // constructor, getters, setters
         
         public Student() {
-            this.name = "John";
+            this.name = "Dimash Kudaibergen";
             this.age = (int)(Math.random()*20 + 10);
         }
     }
 
 
-
+# Thank you for your attention
 ![screen-gif](https://i.pinimg.com/originals/8d/38/6f/8d386fe55805e14eb11db87f5acca164.gif)
+
+![](https://media.tenor.com/rOshXzKXJBIAAAAC/waving-bye.gif)
 
 
