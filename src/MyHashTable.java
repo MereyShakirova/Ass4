@@ -20,6 +20,11 @@ public MyHashTable() {
     this.chainArray = (HashNode<K, V>[]) new HashNode[M];
 }
 public MyHashTable(int M) {
+    this.M = M;
     this.chainArray = (HashNode<K, V>[]) new HashNode[M];
 }
+private int hash(K key) {
+    return(key.hash)
+}
+
 }
