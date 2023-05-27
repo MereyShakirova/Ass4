@@ -30,6 +30,7 @@ public class MyHashTable<K, V> {
     private HashNode<K, V>[] chainArray;
     private int M = 11;
     private int size;
+    private int threshold = (int)(M * 0.75);
     public MyHashTable() {
         chainArray = (HashNode<K, V>[]) new HashNode[M];
     }
@@ -115,6 +116,25 @@ public class MyHashTable<K, V> {
             }
         }
         return null;
+    }
+    private void resize() {
+        int newCapacity = M * 2;
+        HashNode<K, V>[] newchainArray = (HashNode<K, V>[]) new HashNode[newCapacity];
+        for (int i = 0; i < M; i++) {
+            HashNode<K, V> node = chainArray[i];
+            while (node != null) {
+                K key = node.key;
+                V value = node.value;
+                int newIndex = (key.hashCode() & 0x7fffffff) % newCapacity;
+                HashNode<K, V> newNode = new HashNode<>(key, value);
+                newNode.next = newchainArray[newIndex];
+                newchainArray[newIndex] = newNode;
+                node = node.next;
+            }
+        }
+        chainArray = newchainArray;
+        M = newCapacity;
+        threshold = (int) (M * 0.75);
     }
 
     public static void main(String[] args) {
